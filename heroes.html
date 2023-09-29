@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Our superheroes</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+   
+
+      <header>
+
+      </header>
+
+      <section>
+        
+            <h1>Super Hero Squad</h1>
+            <center><p>Hometown:Metro City//Formed:2016</p></center>
+            
+            <left><h2>Molecule Man</h2></left>
+            <left><p>Age:29</p></left>
+            <left><p>Super Powers:</p></left>
+            <left><p><li>Radiation resistance</li></p></left>
+            <left><p><li>Turning Tyni</li></p></left>
+            <left><p><li>Radiation Blast</li></p></left>
+
+            <center><h3>Maddame Uppercut</h3></center>>
+            <center><p>Age:39</p></center>
+            <center><p>Super Powers:</p></center>
+            <center><p><li>Million Tone Punch</li></p></center>
+            <center><p><li>Damage Resistance</li></p></center>
+            <center><p><li>superHuman Reflexes</li></p></center>
+
+            <justify><h4>Eternal Flame</h4></justify>
+            <right><p>Secret identity:Unknown</p></right>
+            <right><p>Age:1000000</p></right>
+            <right><p>Super Powers:</p></right>
+            <right><p><li>Inmortality</li></p></right>
+            <right><p><li>Heat Inmunity</li></p></right>
+            <right><p><li>inferno</li></p></right>
+            <right><p><li>Teleportation</li></p></right>
+            <right><p><li>Interdimencional Travel</li></p></right>
+
+
+        
+        <h1>Ejemplo con JSON</h1>
+       <img src="https://www.cnet.com/a/img/resize/57b705491a76ab875149a26ac95a40fc1a1a021e/hub/2016/10/24/4c7b8f36-6f0e-427b-9884-59e1f7209591/strange1.jpg?auto=webp&fit=crop&height=675&width=1200"</section>
+       
+      <script>
+        const header = document.querySelector('header');
+        const section = document.querySelector('section');
+        const requestURL"https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json";
+        const request = new const request = new XMLHttpRequest();
+        request.open("GET", requestURL);
+        request.responseType = "json";
+request.send();
+
+request.onload = function () {
+    const superHeroes = request.response;
+    populateHeader(superHeroes);
+    showHeroes(superHeroes);
+  }
+
+  function populateHeader(jsonObj) {
+    const myH1 = document.createElement("h1");
+    myH1.textContent = jsonObj["squadName"];
+    header.appendChild(myH1);
+  
+    const myPara = document.createElement("p");
+    myPara.textContent =
+      "Hometown: " + jsonObj["homeTown"] + " // Formed: " + jsonObj["formed"];
+    header.appendChild(myPara);
+  }
+
+  function showHeroes(jsonObj) {
+    const heroes = jsonObj["members"];
+  
+    for (var i = 0; i < heroes.length; i++) {
+      const myArticle = document.createElement("article");
+      const myH2 = document.createElement("h2");
+      const myPara1 = document.createElement("p");
+      const myPara2 = document.createElement("p");
+      const myPara3 = document.createElement("p");
+      const myList = document.createElement("ul");
+  
+      myH2.textContent = heroes[i].name;
+      myPara1.textContent = "Secret identity: " + heroes[i].secretIdentity;
+      myPara2.textContent = "Age: " + heroes[i].age;
+      myPara3.textContent = "Superpowers:";
+  
+      const superPowers = heroes[i].powers;
+      for (var j = 0; j < superPowers.length; j++) {
+        const listItem = document.createElement("li");
+        listItem.textContent = superPowers[j];
+        myList.appendChild(listItem);
+      }
+  
+      myArticle.appendChild(myH2);
+      myArticle.appendChild(myPara1);
+      myArticle.appendChild(myPara2);
+      myArticle.appendChild(myPara3);
+      myArticle.appendChild(myList);
+  
+      section.appendChild(myArticle);
+    }
+  }
+
+  request.responseType = "json";
+
+  request.open("GET", requestURL);
+request.responseType = "text"; // recibimos una cadena de tipo "string"
+request.send();
+
+request.onload = function () {
+  const superHeroesText = request.response; // cogemos la cadena de response
+  const superHeroes = JSON.parse(superHeroesText); // la convertimos a objeto
+  populateHeader(superHeroes);
+  showHeroes(superHeroes);
+};
+Como es de suponer, stringify() trabaja de la forma opuesta. Intente ingresar las siguientes líneas en la consola de JavaScript de su navegador para verlo en acción:
+
+JS
+Copy to Clipboard
+
+const myJSON = { name: "Chris", age: "38" };
+myJSON;
+const myString = JSON.stringify(myJSON);
+myString;
+
+      </script>
+  </body>
+</html>
